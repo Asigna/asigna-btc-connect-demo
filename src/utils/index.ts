@@ -10,7 +10,6 @@ export const getUtxos = async (address: string, isTestnet: boolean): Promise<UTX
     });
     const data = (await res.json()).data;
   
-    // @ts-expect-error api
     return data.utxo.map((utxo) => ({
       ...utxo,
       outputIndex: utxo.vout,
