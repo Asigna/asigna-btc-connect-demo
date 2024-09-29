@@ -48,7 +48,7 @@ function App() {
     const amountToSend = BigNumber(amount).shiftedBy(8);
     psbt.addOutput({value: amountToSend.toNumber(), address});
     // get it from unisat api
-    const FEE_RATE = 4;
+    const FEE_RATE = 20;
     const fee = (calculateGas(psbt) || 0) * FEE_RATE;
     psbt.addOutput({value: totalOutput - amountToSend.toNumber() - fee, address: asignaAddress})
     if (withModal) {
