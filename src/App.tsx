@@ -18,7 +18,7 @@ function App() {
   const {createInput} = useAsignaInputs();
   const {calculateGas} = useAsignaFee();
   const [amount, setAmount] = useState('');
-  const [address, setAddress] = useState('3Byf1xNGDoU2VHNPgkkXvN4dMKfekJSXHN');
+  const [address, setAddress] = useState('');
   const [message, setMessage] = useState('');
 
   useEffect(() => {
