@@ -20,7 +20,8 @@ function App() {
   const [amount, setAmount] = useState('');
   const [address, setAddress] = useState('');
   const [message, setMessage] = useState('');
-
+  const [feeRate, setFeeRate] = useState(25);
+ 
   useEffect(() => {
     if (!asignaAddress)
         return;
@@ -47,9 +48,7 @@ function App() {
 
     const amountToSend = BigNumber(amount).shiftedBy(8);
     psbt.addOutput({value: amountToSend.toNumber(), address});
-    // get it from unisat api
-    const FEE_RATE = 20;
-    const fee = (calculateGas(psbt) || 0) * FEE_RATE;
+    const fee = (calculateGas(psbt) || 0) * feeRate;
     psbt.addOutput({value: totalOutput - amountToSend.toNumber() - fee, address: asignaAddress})
     if (withModal) {
       openSignPsbt(psbt, true)
@@ -69,6 +68,7 @@ function App() {
         <div>Balance: {balance / Math.pow(10, 8)}</div>  
         <div><input placeholder='Amount' value={amount} onChange={(e) => setAmount(e.target.value)} /></div>
         <div><input placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)} /></div>
+        <div><input placeholder='Fee Rate' value={feeRate} onChange={(e) => setFeeRate(Number(e.target.value))} /></div>
         <button onClick={() => createTx(true)} style={{marginTop: 10}}>
           Open Send Tx Modal
         </button>
