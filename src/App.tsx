@@ -42,7 +42,7 @@ function App() {
       const input = createInput(utxo);
       if (!input)
           return;
-      psbt.addInput(input.data);
+      psbt.addInput(input);
       totalOutput += input.utxo.satoshis;
     })
 
