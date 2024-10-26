@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@asigna/btc-connect": "^0.0.7",
+    "@asigna/btc-connect": "^0.0.8",
     "@material-ui/core": "^4.12.4",
     "bignumber.js": "^9.1.2",
     "bip32": "^5.0.0-rc.0",
