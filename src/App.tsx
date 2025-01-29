@@ -9,7 +9,7 @@ import BigNumber from 'bignumber.js';
 bitcoin.initEccLib(tinysecp)
 
 
-const NETWORK = bitcoin.networks.testnet;
+const NETWORK = bitcoin.networks.bitcoin;
 
 function App() {
   const {openSignMessage, openSignPsbt, signPsbt, connect} = useAsignaExtension();
@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     if (!asignaAddress)
         return;
-    getUtxos(asignaAddress, NETWORK === bitcoin.networks.testnet).then(setUtxos);
+    getUtxos(asignaAddress, false).then(setUtxos);
   }, [asignaAddress]);
 
   const balance = useMemo(() => {
