@@ -10,10 +10,10 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
-"@asigna/btc-connect@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.npmjs.org/@asigna/btc-connect/-/btc-connect-0.0.8.tgz"
-  integrity sha512-yKWq3nOIktvhFjxQEeKHaXuIhUQA9e8yD6eOVN2c1rG9zqo0ryvM3FLM6a0KTOU6II40h4y+2MKAhuP69Xp3Rg==
+"@asigna/btc-connect@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@asigna/btc-connect/-/btc-connect-0.0.18.tgz#5f14d0fad475cc088cdc4c51799966b279f69259"
+  integrity sha512-GQ9y/qgqTD+weKCvS+I1/tgSQ25rxp3aul7MCMAANueyyrCjQXa5qVEjKyOxdRQ5cjQ3OuM+x0ZXFlSaH90Fng==
   dependencies:
     "@material-ui/core" "^4.12.4"
     "@types/node" "^22.5.5"

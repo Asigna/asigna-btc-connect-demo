@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { UTXO } from './types';
 import { getUtxos } from './utils';
-import { SignActionModals, useAsignaExtension, useAsignaAddress, useAsignaInputs, useAsignaFee, validateMessage, useAsignaSafeInfo } from '@asigna/btc-connect';
+import { AsignaSignActionModals, useAsignaConnect, useAsignaAddress, useAsignaInputs, useAsignaFee, validateMessage, useAsignaSafeInfo } from '@asigna/btc-connect';
 import * as bitcoin from 'bitcoinjs-lib';
 import * as tinysecp from "tiny-secp256k1";
 import BigNumber from 'bignumber.js';
@@ -12,7 +12,7 @@ bitcoin.initEccLib(tinysecp)
 const NETWORK = bitcoin.networks.bitcoin;
 
 function App() {
-  const {openSignMessage, openSignPsbt, signPsbt, connect} = useAsignaExtension();
+  const {openSignMessage, openSignPsbt, signPsbt, connect} = useAsignaConnect();
   const [utxos, setUtxos] = useState<UTXO[]>();
   const {asignaAddress} = useAsignaAddress();
   const {createInput} = useAsignaInputs();
@@ -82,7 +82,7 @@ function App() {
           Sign Message Modal
         </button>
       </div>}
-      <SignActionModals onSignPsbt={(tx) => {
+      <AsignaSignActionModals onSignPsbt={(tx) => {
         console.log('PSBT: ' + tx);
       }} onSignMessage={(signature) => {
         console.log('MESSAGE SIG:', signature)
