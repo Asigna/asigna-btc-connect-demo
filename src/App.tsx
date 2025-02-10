@@ -3,13 +3,11 @@ import './App.css'
 import { UTXO } from './types';
 import { getUtxos } from './utils';
 import { AsignaSignActionModals, useAsignaConnect, useAsignaAddress, useAsignaInputs, useAsignaFee, validateMessage, useAsignaSafeInfo } from '@asigna/btc-connect';
+import { useNetworkBitcoin, useNetworkMode } from '@asigna/btc-connect/dist/hooks/useNetworkBitcoin'
 import * as bitcoin from 'bitcoinjs-lib';
 import * as tinysecp from "tiny-secp256k1";
 import BigNumber from 'bignumber.js';
 bitcoin.initEccLib(tinysecp)
-
-
-const NETWORK = bitcoin.networks.bitcoin;
 
 function App() {
   const {openSignMessage, openSignPsbt, signPsbt, connect} = useAsignaConnect();
@@ -21,11 +19,13 @@ function App() {
   const [address, setAddress] = useState('');
   const [message, setMessage] = useState('');
   const [feeRate, setFeeRate] = useState(25);
- 
+  const network = useNetworkMode();
+  const NETWORK = useNetworkBitcoin();
+
   useEffect(() => {
     if (!asignaAddress)
         return;
-    getUtxos(asignaAddress, false).then(setUtxos);
+    getUtxos(asignaAddress, network === 'testnet').then(setUtxos);
   }, [asignaAddress]);
 
   const balance = useMemo(() => {
@@ -56,14 +56,20 @@ function App() {
       signPsbt(psbt);
   }
 
-  const {asignaSafeInfo} = useAsignaSafeInfo();
+  const {asignaSafeInfo} = useAsignaSafeInfo(); 
+
+  const disconnect = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
 
   return (
     <div>
-      {asignaAddress && <div>Connected with <span style={{fontWeight: 'bold'}}>{asignaAddress}</span></div>}
+      {asignaAddress && <div>Connected with <span style={{fontWeight: 'bold'}}>{asignaAddress}</span> on {network}</div>}
       {!asignaAddress && <div onClick={connect}>
         Connect
       </div>}
+      {!!asignaAddress} && <div onClick={disconnect}>Diconnect</div>
       {asignaAddress && <div>
         <div>Balance: {balance / Math.pow(10, 8)}</div>  
         <div><input placeholder='Amount' value={amount} onChange={(e) => setAmount(e.target.value)} /></div>
